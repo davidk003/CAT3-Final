@@ -141,7 +141,7 @@
 // }
 function startScene6()
 {
-    console.log("test");
+    console.log("Running scene 6");
 }
 
 
