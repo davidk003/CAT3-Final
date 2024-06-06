@@ -1,5 +1,5 @@
 // import * as THREE from 'three';
-// import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 // import {OBJLoader} from 'three/addons/loaders/OBJLoader.js';
 // Setup scene, camera, renderer
 const scene = new THREE.Scene();
@@ -39,7 +39,7 @@ objLoader.load(
     (object) => {
         // Calculate the bounding box of the object
         const box = new THREE.Box3().setFromObject(object);
-        const center = box.getCenter(new THREE.Vector3());
+        const center = box .getCenter(new THREE.Vector3());
 
         // Center the object and scale it
         object.scale.set(30, 30, 30); // Scale up by a factor of 30

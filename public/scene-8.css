@@ -1,0 +1,20 @@
+.scene-8{
+    visibility: hidden;
+}
+#poem-scene-8-container {
+    visibility: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 100;
+}
+
+#poem-scene-8 {
+    font-size: 40px;
+    line-height: 1.5;
+    white-space: pre;
+    color: var(--Flame);
+    z-index: 100;
+}
