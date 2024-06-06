@@ -23,9 +23,11 @@
     <a id="scene-3">Scene 3</a> 
               .....-->
     </div>
-    <script >
+<script type="module">  
       import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
-      import {OBJLoader} from 'three/addons/loaders/OBJLoader.js';
+      import {OBJLoader} from 'three/addons/loaders/OBJLoader.js';</script>
+       <!--
+    <script >
       // Setup scene, camera, renderer
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -165,7 +167,7 @@
       });
       }
       document.getElementById('scene-6').addEventListener('click', ()=>{startScene6()});
-      </script>
+      </script> -->
     <canvas id="cnv" class="scene-1"></canvas>
 
 
@@ -210,6 +212,9 @@
     <img class="scene-9" src="bg.png" id="pattern" width=50 height=50>
     <canvas id="chalkboard" class="scene-9"></canvas>
     <div class="chalk scene-9"></div>
+    <div id="poem-scene-9-container" class="scene-9">
+      <pre id="poem-scene-9"></pre>
+  </div>
 
     <div id="animation-layer">
       <div class="horizontal-block first-block"></div>
@@ -232,7 +237,7 @@
     <script src="chalk.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/threejs/r84/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three-js@79.0.0/three.min.js"></script>
 
     <script>
       function resetHorizontalBlocks() {

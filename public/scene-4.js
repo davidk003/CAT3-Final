@@ -43,4 +43,4 @@ boxBackground.addEventListener("click", ()=>{
     
 }, 2500); })
 
-poem4.addEventListener("click", ()=>{document.getElementById('scene-5').click()});
+// poem4.addEventListener("click", ()=>{document.getElementById('scene-5').click()});

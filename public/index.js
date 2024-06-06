@@ -70,7 +70,11 @@ SCENES.forEach(function (element, i)
   link.setAttribute("class", "navbar");
   navbar.appendChild(link);
 });
-
+let fullTranslation = document.createElement("a");
+fullTranslation.textContent ="Full Translation";
+fullTranslation.setAttribute('href', "final-translation.html")
+fullTranslation.setAttribute('class', "navbar")
+navbar.appendChild(fullTranslation);
 
 
 document.getElementById('planet').addEventListener('click', ()=>{leaveStart(); setTimeout(() => {document.getElementById('scene-2').click();}, 250);  });

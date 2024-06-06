@@ -1,6 +1,23 @@
 .scene-9{
     visibility: hidden;
 }
+#poem-scene-9-container {
+    visibility: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 100;
+}
+
+#poem-scene-9 {
+    font-size: 40px;
+    line-height: 1.5;
+    white-space: pre;
+    color: rgb(197, 197, 197);
+    z-index: 100;
+}
 #chalkboard{
     position:absolute;
     top:0;
