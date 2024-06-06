@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>CAT 3 Translation Project</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="scene-2.css" />
+    <link rel="stylesheet" href="scene-3.css" />
+    <link rel="stylesheet" href="scene-4.css" />
+    <link rel="stylesheet" href="scene-5.css" />
+    <link rel="stylesheet" href="scene-6.css" />
+    <link rel="stylesheet" href="scene-7.css" />
+    <link rel="stylesheet" href="scene-8.css" />
+    <link rel="stylesheet" href="scene-9.css" />
+  </head>
+  <body>
+    <div class="navbar">
+      <!-- <a id="scene-1">Scene 1</a>
+    <a id="scene-2">Scene 2</a>
+    <a id="scene-3">Scene 3</a> 
+              .....-->
+    </div>
+    <script type="module">import * as THREE from 'three';
+      import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+      import {OBJLoader} from 'three/addons/loaders/OBJLoader.js';
+      // Setup scene, camera, renderer
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.set(0, 20, 20); // Position the camera above the object
+      camera.lookAt(0, 0, 0); // Look at the center of the scene
+      
+      const canvas = document.getElementById('c');
+      const renderer = new THREE.WebGLRenderer({ antialias: true, canvas });
+      renderer.setSize(window.innerWidth, window.innerHeight); // Set renderer size to match window dimensions
+      
+      
+      // Background environment
+      scene.background = new THREE.Color(0x000022); // Dark blue color to complement the light source
+      
+      // Add lighting
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+      scene.add(ambientLight);
+      const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+      scene.add(directionalLight);
+      
+      // Add a large plane wireframe
+      const planeGeometry = new THREE.PlaneGeometry(1000, 1000, 100, 100);
+      const planeWireframeGeometry = new THREE.WireframeGeometry(planeGeometry);
+      const planeMaterial = new THREE.LineBasicMaterial({ color: 0x00ff00 }); // Matrix green color for wireframe
+      const plane = new THREE.LineSegments(planeWireframeGeometry, planeMaterial);
+      plane.rotation.x = -Math.PI / 2;
+      scene.add(plane);
+      
+      function startScene6()
+      {
+          console.log("starting 6 animation");
+          // Load and add the .obj model
+      const objLoader = new OBJLoader();
+      objLoader.load(
+          'https://raw.githubusercontent.com/davidk003/CAT3-Translation-Project/main/model.obj',
+          (object) => {
+              // Calculate the bounding box of the object
+              const box = new THREE.Box3().setFromObject(object);
+              const center = box.getCenter(new THREE.Vector3());
+      
+              // Center the object and scale it
+              object.scale.set(30, 30, 30); // Scale up by a factor of 30
+              object.position.set(-center.x * 30, -center.y * 30, -center.z * 30); // Adjust position to center it
+      
+              object.traverse((child) => {
+                  if (child instanceof THREE.Mesh) {
+                      // Apply MeshStandardMaterial
+                      child.material = new THREE.MeshStandardMaterial({
+                          color: 0xff0000, // Reddish brown color
+                          metalness: 0.7,
+                          roughness: 0.4
+                      });
+                  }
+              });
+      
+              scene.add(object);
+              object.rotation.z = Math.PI/4
+      
+          // Particle system parameters
+              const particleCount = 5;
+              const particleGeometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
+              const particleMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff});
+              const particles = new THREE.Group();
+      
+                  setInterval(()=>{        // Initialize particles
+              for (let i = 0; i < particleCount; i++) {
+                  const particle = new THREE.Mesh(particleGeometry, particleMaterial);
+                  particle.position.copy(object.position);
+      
+                  // Give particles a random velocity outward from the spawn point
+                  const velocity = new THREE.Vector3(
+                      Math.random() * 2 - 1,
+                      0,
+                      -Math.random()
+                  ).normalize().multiplyScalar(0.5);
+                  particle.userData.velocity = velocity;
+      
+                  particles.add(particle);
+              }
+      
+              scene.add(particles);  },200)
+              // Animation loop
+              function animateParticles() {
+                  requestAnimationFrame(animateParticles);
+                  // Apply gravity to particles after a set amount of time
+                // Move object forward along its local z-axis
+                  object.translateZ(0.5);
+      
+                  // Check if the object exceeds the boundaries of the plane
+                  const boundary = 500; // Half of the plane size
+                  if (Math.abs(object.position.x) > boundary || Math.abs(object.position.z) > boundary) {
+                      // Reset object position to the center
+                      object.position.set(0, 0, 0);
+                  }
+      
+                  // Update controls target and camera position relative to the object
+                  controls.target.copy(object.position);
+                  camera.position.copy(object.position).add(new THREE.Vector3(0, 20, 30)); // Maintain the relative distance
+      
+                  renderer.render(scene, camera);
+                
+                  particles.children.forEach((particle) => {
+                      if (particle.userData.velocity) {
+                          // Move particles according to their velocity
+                          particle.position.add(particle.userData.velocity);
+      
+                          // Apply gravity after 2 seconds
+                          if (Date.now() - particle.userData.startTime > 2000) {
+                              scene.remove(particle);
+                          }
+                      }
+                  });
+      
+                  renderer.render(scene, camera);
+              }
+      
+              animateParticles();
+          },
+          (xhr) => {
+              console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+          },
+          (error) => {
+              console.error('An error happened', error);
+          }
+      );
+      
+      // Add camera controls
+      const controls = new OrbitControls(camera, renderer.domElement);
+      controls.target.set(0, 0, 0); // Set the controls target to the center of the scene
+      controls.update();
+      
+      // Adjust canvas size when window is resized
+      window.addEventListener('resize', () => {
+          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+      }
+      document.getElementById('scene-6').addEventListener('click', ()=>{startScene6()});
+      </script>
+    <canvas id="cnv" class="scene-1"></canvas>
+
+
+    <div id="left-door" class="scene-2 door"></div>
+    <div id="right-door" class="scene-2 door"></div>
+    <div id="poem-scene-2-container" class="scene-2">
+        <pre id="poem-scene-2"></pre>
+    </div>
+
+
+    <div id="darkness" class="scene-3"></div>
+    <div id="flashlight" class="scene-3"></div>
+    <div id="poem-scene-3-container" class="scene-3">
+      <pre id="poem-scene-3"></pre>
+  </div>
+
+    <div id="box-background" class="scene-4"></div>
+    <div id="poem-scene-4-container" class="scene-4">
+      <pre id="poem-scene-4"></pre>
+  </div>
+
+    <div id="cradle-background" class="scene-5"></div>
+    <div id="poem-scene-5-container" class="scene-5">
+      <pre id="poem-scene-5"></pre>
+      <pre id="poem-scene-5-2"></pre>
+  </div>
+    <div class="cradle scene-5">
+      <div class="cradle-top scene-5">
+        <div id="first" class="ball first scene-5"></div>
+          <div class="ball scene-5"></div>
+          <div class="ball scene-5"></div>
+          <div class="ball scene-5"></div>
+          <div id="last" class="ball last scene-5"></div>
+      </div>
+    </div>
+
+
+    <canvas id="c" class="scene-6"></canvas>
+    
+    <canvas id="globe" class="scene-7"></canvas>
+
+    <img class="scene-9" src="bg.png" id="pattern" width=50 height=50>
+    <canvas id="chalkboard" class="scene-9"></canvas>
+    <div class="chalk scene-9"></div>
+
+    <div id="animation-layer">
+      <div class="horizontal-block first-block"></div>
+      <div class="horizontal-block second-block"></div>
+      <div class="horizontal-block third-block"></div>
+      <div class="horizontal-block fourth-block"></div>
+      <div class="horizontal-block fifth-block"></div>
+    </div>
+
+    <svg
+      viewBox="0 0 200 200"
+      width="100"
+      height="100"
+      xmlns="http://www.w3.org/2000/svg"
+      id="planet"
+      class="scene-1"
+    >
+      <image href="planet.png" height="200" width="200"></image>
+    </svg>
+    <script src="chalk.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/threejs/r84/three.min.js"></script>
+
+    <script>
+      function resetHorizontalBlocks() {
+        $(".horizontal-block")
+          .stop() // Stop any ongoing animations
+          .css({
+            // Reset styles
+            left: "0", // Move blocks off-screen
+            width: "100%", // Set width to 0
+            borderRadius: "0px", // Reset border-radius
+          });
+      }
+      // $(document).ready(
+      function pretransition() {
+        console.log("PreTransition Start");
+        // Initial left position to animate from
+        $(".horizontal-block").css("left", "-100%");
+
+        // Slide blocks into position
+        $(".horizontal-block").animate(
+          {
+            left: 0,
+          },
+          500,
+          function () {
+            // After sliding in, start width animation
+            $(".horizontal-block").each(function (index) {
+              setTimeout(() => {
+                $(this).css("width", "100%");
+              }, index * 200); // Stagger the animations by 200 milliseconds
+            });
+          }
+        );
+        setTimeout(() => {
+          $(".horizontal-block").css("border-radius", "0 5px 5px 0");
+        }, 1000);
+      }
+      // );
+      // $(document).ready(
+      function transition() {
+        console.log("Transition out");
+        // Enhanced easing function for a more prominent bounce effect
+        $.extend($.easing, {
+          bounce: function (x, t, b, c, d) {
+            if ((t /= d) < 1 / 2.75) {
+              return c * (7.5625 * t * t) + b;
+            } else if (t < 2 / 2.75) {
+              return c * (7.5625 * (t -= 1.5 / 2.75) * t + 0.75) + b;
+            } else if (t < 2.5 / 2.75) {
+              return c * (7.5625 * (t -= 2.25 / 2.75) * t + 0.9375) + b;
+            } else {
+              return c * (7.5625 * (t -= 2.625 / 2.75) * t + 0.984375) + b;
+            }
+          },
+        });
+
+        // Function to animate width transition in smaller intervals
+        function animateBlocks() {
+          var intervals = [80, 60, 40, 0];
+          var duration = 150; // 0.1 seconds for each interval
+          var stagger = 100; // 0.3 seconds stagger between each block animation
+
+          $(".horizontal-block").each(function (index) {
+            var delay = index * stagger;
+
+            intervals.forEach(
+              function (width, i) {
+                $(this)
+                  .delay(delay)
+                  .animate(
+                    { width: width + "%" },
+                    {
+                      duration: duration,
+                      easing: "bounce",
+                      complete: function () {
+                        // Optionally, you can do something when each interval completes
+                      },
+                    }
+                  );
+                delay += duration;
+              }.bind(this)
+            ); // Bind 'this' to correctly reference the current block
+          });
+        }
+
+        // Start the animation
+        animateBlocks();
+      }
+      // );
+    </script>
+    <script>
+      $(document).ready(function () {
+        // Loop through scene links from 1 to 9
+        for (let i = 1; i <= 9; i++) {
+          const sceneLink = $(`#scene-${i}`);
+          sceneLink.click(function () {
+            resetHorizontalBlocks();
+            $(".horizontal-block").css("visibility", "visible");
+            pretransition();
+            setTimeout(() => {
+              transition();
+            }, 300);
+            setTimeout(() => {
+              $(".horizontal-block").css("visibility", "hidden");
+              resetHorizontalBlocks();
+            }, 6000);
+          });
+        }
+      });
+    </script>
+    <!-- <script src="//unpkg.com/globe.gl"></script> -->
+    <script src="starting.js"></script>
+    <script src="index.js"></script>
+    <script src="panning.js"></script>
+    <script src="friction.js"></script>
+    <script src="scene-1.js"></script>
+    <script src="scene-2.js"></script>
+    <script src="scene-3.js"></script>
+    <script src="scene-4.js"></script>
+    <script src="scene-5.js"></script>
+    <script src="scene-6.js"></script>
+    <script src="scene-7.js"></script>
+    <script src="scene-8.js"></script>
+    <script src="scene-9.js"></script>
+  </body>
+</html>
