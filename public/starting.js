@@ -102,7 +102,6 @@ function countUp()
 
 function leaveStart()
 {
-  renderer.dispose();
   // alert("Clicked!");
   starSpawnSpeed = 0.5;
   countUp();
