@@ -40,7 +40,9 @@ import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
       // Setup scene, camera, renderer
-      const scene = new THREE.Scene();
+      function startScene6()
+      {
+        const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
       camera.position.set(0, 20, 20); // Position the camera above the object
       camera.lookAt(0, 0, 0); // Look at the center of the scene
@@ -67,8 +69,6 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
       plane.rotation.x = -Math.PI / 2;
       scene.add(plane);
       
-      function startScene6()
-      {
           console.log("starting 6 animation");
           // Load and add the .obj model
       const objLoader = new OBJLoader();
@@ -171,6 +171,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
       controls.update();
       
       // Adjust canvas size when window is resized
+      canvas.addEventListener('visibilitychange', ()=>{if(canvas.style.visibility=="hidden"){renderer.dispose();console.log("disposed");}});
       window.addEventListener('resize', () => {
           camera.aspect = window.innerWidth / window.innerHeight;
           camera.updateProjectionMatrix();
@@ -217,6 +218,10 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 
     <canvas id="c" class="scene-6"></canvas>
+    <div id="poem-scene-6-container" class="scene-6">
+      <pre id="poem-scene-6"></pre>
+  </div>
+
     
     <canvas id="idk" class="scene-7"></canvas>
     <div id="poem-scene-7-container" class="scene-7">
