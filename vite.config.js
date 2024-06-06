@@ -1,4 +1,7 @@
+import { defineConfig } from 'vite'
 export default defineConfig({
-    plugins: [],
+  devServer: {
+    port: 3001,
+  },
     base: "/CAT3-Final/"
   })
