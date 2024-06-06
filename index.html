@@ -73,7 +73,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
           // Load and add the .obj model
       const objLoader = new OBJLoader();
       objLoader.load(
-          'https://raw.githubusercontent.com/davidk003/CAT3-Translation-Project/main/model.obj',
+          'model.obj',
           (object) => {
               // Calculate the bounding box of the object
               const box = new THREE.Box3().setFromObject(object);

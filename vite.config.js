@@ -4,6 +4,6 @@ export default defineConfig({
   devServer: {
     port: 3001,
   },
-    base: "/",
+    base: "/CAT3-Final/",
     
   })
