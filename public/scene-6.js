@@ -1,6 +1,8 @@
 // import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-// import {OBJLoader} from 'three/addons/loaders/OBJLoader.js';
+
+// import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+// import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
+
 // Setup scene, camera, renderer
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -8,9 +10,6 @@ camera.position.set(0, 20, 20); // Position the camera above the object
 camera.lookAt(0, 0, 0); // Look at the center of the scene
 
 const canvas = document.getElementById('c');
-const renderer = new THREE.WebGLRenderer({ antialias: true, canvas });
-renderer.setSize(window.innerWidth, window.innerHeight); // Set renderer size to match window dimensions
-
 
 // Background environment
 scene.background = new THREE.Color(0x000022); // Dark blue color to complement the light source
@@ -32,6 +31,9 @@ scene.add(plane);
 function startScene6()
 {
     console.log("starting 6 animation");
+    const renderer = new THREE.WebGLRenderer({ antialias: true, canvas });
+renderer.setSize(window.innerWidth, window.innerHeight); // Set renderer size to match window dimensions
+
     // Load and add the .obj model
 const objLoader = new OBJLoader();
 objLoader.load(

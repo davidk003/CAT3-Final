@@ -22,12 +22,23 @@
     <a id="scene-2">Scene 2</a>
     <a id="scene-3">Scene 3</a> 
               .....-->
-    </div>
-<script type="module">  
-      import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
-      import {OBJLoader} from 'three/addons/loaders/OBJLoader.js';</script>
-       <!--
-    <script >
+
+      </div>
+      <script type="importmap">
+        {
+          "imports": {
+            "three": "../build/three.module.js",
+            "three/addons/": "./jsm/"
+          }
+        }
+      </script>
+
+       
+    <script type="module">
+      import * as THREE from 'three';
+import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
       // Setup scene, camera, renderer
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -167,7 +178,7 @@
       });
       }
       document.getElementById('scene-6').addEventListener('click', ()=>{startScene6()});
-      </script> -->
+      </script>
     <canvas id="cnv" class="scene-1"></canvas>
 
 
