@@ -77,10 +77,10 @@ fullTranslation.setAttribute('class', "navbar")
 navbar.appendChild(fullTranslation);
 
 
-document.getElementById('planet').addEventListener('click', ()=>{leaveStart(); setTimeout(() => {document.getElementById('scene-2').click();}, 250);  });
+document.getElementById('planet').addEventListener('click', ()=>{setTimeout(() => {document.getElementById('scene-2').click();}, 10);});
 
 
-document.getElementById('scene-1').addEventListener('click', ()=>{startScene1();hideScene(currentScene);currentScene="scene-1";showScene(currentScene);run();});
+document.getElementById('scene-1').addEventListener('click', ()=>{location.reload()});
 document.getElementById('scene-2').addEventListener('click', ()=>{leaveStart();setTimeout(()=>{hideScene(currentScene); currentScene="scene-2";startScene2();showScene(currentScene);},1000)});
 
 // document.getElementById('scene-2').addEventListener('click', ()=>{leaveStart();setTimeout(()=>{hideScene(currentScene); currentScene="scene-2";startScene2();showScene(currentScene);},1000)});
