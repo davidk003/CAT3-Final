@@ -2,19 +2,42 @@ const poem7 = document.getElementById('poem-scene-7');
 const canvas7 = document.getElementById('seven');
 const ctx7 = canvas7.getContext('2d');
 const cloud = document.getElementById('cloud');
+var cloudBrightness = 1;
 function startScene7()
 {
     // poem7.textContent = SCENE7TEXT;
     poem7.textContent = SCENE7TEXT;
     // Start animation loop
     // Event listener for click to toggle lightning visibility
-    document.addEventListener('click', function(event) {
-        if(currentScene==="scene-7")
+    setTimeout(() => {
+        document.addEventListener('click', function(event) {
+            if(currentScene==="scene-7")
+            {
+                cloud.style.filter = "brightness(" + cloudBrightness + ")";
+                if (cloudBrightness>0.5)
+                {
+                    cloudBrightness-=0.1;
+                }
+                toggleLightning(event);
+                setTimeout(() => {document.documentElement.style.setProperty('filter', 'brightness(0.6)');
+                    setTimeout(() => {document.documentElement.style.setProperty('filter', 'brightness(0.8)');
+                        setTimeout(() => {document.documentElement.style.setProperty('filter', 'brightness(0.6)');
+                            setTimeout(() => {document.documentElement.style.setProperty('filter', 'brightness(1)');
+                            }, 50);
+                        }, 100);
+                    }, 100);
+                }, 300);
+            }
+        });
+    }, 500);
+    var brighten = setInterval(() => {
+        if(cloudBrightness <1 )
         {
-            toggleLightning(event);
+            cloudBrightness+=0.005;
         }
-    });
-
+        cloud.style.filter = "brightness(" + cloudBrightness + ")";
+        console.log("brightening: " + cloudBrightness);
+    }, 100);
     update();
     document.getElementsByTagName("body")[0].style.cursor = "pointer";
 
@@ -23,7 +46,7 @@ function startScene7()
 function cleanupScene7()
 {
     document.getElementsByTagName("body")[0].style.cursor = "default";
-
+    clearInterval(brighten);
 }
 
 // Event listener for mousemove to update cloud position and rain positions

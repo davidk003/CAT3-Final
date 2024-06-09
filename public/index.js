@@ -89,6 +89,12 @@ fullTranslation.setAttribute('href', "final-translation.html")
 fullTranslation.setAttribute('class', "navbar")
 navbar.appendChild(fullTranslation);
 
+let translatorIntro = document.createElement("a");
+translatorIntro.textContent ="Translator's Introduction";
+translatorIntro.setAttribute('href', "translators-introduction.html")
+translatorIntro.setAttribute('class', "navbar")
+navbar.appendChild(translatorIntro);
+
 
 document.getElementById('planet').addEventListener('click', ()=>{setTimeout(() => {document.getElementById('scene-2').click();}, 10);});
 
