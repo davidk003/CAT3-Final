@@ -18,3 +18,81 @@
     color: var(--Flame);
     z-index: 100;
 }
+
+#seven{
+    background: #87ceeb;
+    z-index: 49;
+    visibility: hidden;
+    height: 100%;
+    width: 100%;
+}
+
+#cloud{
+    z-index: 51;
+    animation: move 6s ease infinite;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%; left: 50%;
+    margin-top: -30px;
+    margin-left: -30px;
+    background: #FFFFFF;
+    height: 60px; width: 60px;
+    box-shadow:
+        #FFFFFF 65px -15px 0 -5px, 
+        #FFFFFF 25px -25px, 
+        #FFFFFF 30px 10px, 
+        #FFFFFF 60px 15px 0 -10px, 
+        #FFFFFF 85px 5px 0 -5px;
+}
+
+
+@keyframes move{
+  50% { transform: translateY(-30px); }
+}
+
+.lightning {
+    visibility: hidden;
+    z-index: 50;
+    position: absolute;
+    border: 12px solid rgba(0, 0, 0, 0);
+    border-bottom: 66px solid #ffdf00; /* Scaled by a factor of 3 */
+    transform: rotateZ(-160deg);
+    padding: 6px; /* Scaled by a factor of 3 */
+    width: 0;
+    height: 0;
+    margin: 0;
+    overflow: visible;
+    border-top: 0 solid;
+    border-radius: 0;
+    transform-origin: 50% 50% 0;
+    animation: fade 0.3s linear;
+}
+
+.lightning:after {
+    z-index: 50;
+    position: absolute;
+    content: "";
+    top: -27px; /* Scaled by a factor of 3 */
+    left: -24px; /* Scaled by a factor of 3 */
+    border: 15px solid rgba(0, 0, 0, 0);
+    border-bottom: 75px solid #ffdf00; /* Scaled by a factor of 3 */
+    transform: rotateZ(4deg);
+    padding: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+    margin: 0;
+    overflow: visible;
+    border-top: 0 solid;
+    border-radius: 0;
+    transform-origin: 50% 50% 0;
+    animation: fadein 0.3s linear;
+}
+
+
+@keyframes fade {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+
+}

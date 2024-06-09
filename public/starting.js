@@ -113,6 +113,7 @@ function leaveStart()
 function cleanupScene()
 {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  leaveStart();
 }
 
 window.onresize = function() {
