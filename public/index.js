@@ -5,7 +5,7 @@ const SCENE3TEXT = "Laying rest\nOut of time and air\nYet dying not depressed\nO
 const SCENE4TEXT = "All are at peace\nTill a loud roar\nAllows the pain to release\nIs that what you intended for?\nTrapped to hear agony and disjoy\nEscaping is as hard as it to destroy";
 const SCENE5TEXT = "one can remain on their course\nunless there is an imbalance\nfor in every action, a reaction unfolds";
 const SCENE6TEXT = "a force that shapes\neach night and day\nthe sun and moon\nand the friction in one's life";
-const SCENE7TEXT = "every disappointment\nevery mistake\nall the moments of sadness\ndespair\nmakes one wonder\nthe control they truly have\nover their own lives\nif it's up to fate\nor the unseeable forces\ncontrolling the motion\nof the world"
+const SCENE7TEXT = "every disappointment\nevery mistake\nall the moments of sadness\ndespair\nmakes one wonder";
 const SCENE8TEXT = "makes one wonder\nthe control they truly have\nover their own lives\nif it's up to fate\nor the unseeable forces\ncontrolling the motion\nof the world";
 const SCENE9TEXT = "Sorrows of reflect\nLessons fade in friction grip\nVillage in stillness";
 const SCENES = [
@@ -38,14 +38,26 @@ function showScene(className)
 
 function transitionAnimation()
 {
-  // console.log("DO ANIMATION HERE");
+  // let navbar = document.getElementsByClassName("navbar");
+  // console.log("set unclickable");
+  // [...navbar].forEach(element => {
+  //   element.setAttribute("pointer-events", "none");
+  // });
+  
+  // [...navbar].forEach(element => {
+  //   setTimeout(() => {
+  //     console.log("set clickable")
+  //     element.setAttribute("pointer-events", "auto");
+  //   }, 5000);
+  // });
 }
-
 
 //ONCLICK->Transition animation->Hide Current Scene->Set current scene->Show current scene->Run scene functions
 function transitionScene(sceneToStart)
 {
-  let sceneNumber = currentScene.replace(/[^0-9]/g, '');
+  if(!transitioning)
+  {
+    let sceneNumber = currentScene.replace(/[^0-9]/g, '');
   let storeScene = currentScene;
   transitionAnimation();            //Play transition animation
   setTimeout(() => {hideScene(storeScene);}, 500);          //Hide scene 
@@ -57,6 +69,7 @@ function transitionScene(sceneToStart)
   let thing = "startScene"+sceneToStart.replace(/[^0-9]/g, '')+"()";
   eval(thing)
   // window["startScene"+sceneToStart.replace(/[^0-9]/g, '')];//Call Scene runner
+  }
   
 }
 

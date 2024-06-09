@@ -6,6 +6,7 @@
     --AirSuperiorityBlue: #669BBC;
 
     background-color: var(--DelftBlue);
+    --linkHighlight: var(--AirSuperiorityBlue);
 }
 
 body{
@@ -79,7 +80,7 @@ canvas{
     height: 100%;
     left:0;
     top:0;
-    z-index:-1;
+    z-index:30;
 }
 
 * {
@@ -90,14 +91,14 @@ canvas{
 
 .navbar{
     position: relative;
-    z-index: 101;
+    z-index: 1000;
     color: black;
     background-color: var(--DelftBlue);
     overflow: hidden;
 }
 
 .navbar a{
-    z-index: 101;
+    z-index: 1000;
     float: left;
     color: white;
     text-align: center;
@@ -109,15 +110,15 @@ canvas{
 a:link, a:visited, a:hover, a:active{
     color: white;
     text-decoration: none;
-    z-index: 101;
+    z-index: 1000;
 }
 
 .navbar a:hover{
-    background-color: var(--AirSuperiorityBlue);
+    background-color: var(--linkHighlight);
     cursor:pointer;
-    z-index: 101;
+    z-index: 1000;
 }
 
 svg{
-    z-index: 50;
+    z-index: 52;
 }

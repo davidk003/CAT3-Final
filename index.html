@@ -182,7 +182,6 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
       </script>
     <canvas id="cnv" class="scene-1"></canvas>
 
-
     <div id="left-door" class="scene-2 door"></div>
     <div id="right-door" class="scene-2 door"></div>
     <div id="poem-scene-2-container" class="scene-2">
@@ -223,14 +222,16 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
   </div>
 
     
-    <canvas id="idk" class="scene-7"></canvas>
+    <!-- <canvas id="seven" class="scene-7"></canvas>
+    <div id="cloud" class="scene-7"></div>
     <div id="poem-scene-7-container" class="scene-7">
       <pre id="poem-scene-7"></pre>
-  </div>
+  </div> -->
 
-  <div id="poem-scene-8-container" class="scene-8">
-    <pre id="poem-scene-8"></pre>
-</div>
+  <!-- <div id="poem-scene-8-container" class="scene-8">
+  </div>
+      <span id="control" class="poem-scene-8"></span>
+</div> -->
 
     <img class="scene-9" src="bg.png" id="pattern" width=50 height=50>
     <canvas id="chalkboard" class="scene-9"></canvas>
@@ -246,17 +247,18 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
       <div class="horizontal-block fourth-block"></div>
       <div class="horizontal-block fifth-block"></div>
     </div>
-
     <svg
-      viewBox="0 0 200 200"
-      width="100"
-      height="100"
-      xmlns="http://www.w3.org/2000/svg"
-      id="planet"
-      class="scene-1"
-    >
-      <image href="planet.png" height="200" width="200"></image>
-    </svg>
+    viewBox="0 0 200 200"
+    width="100"
+    height="100"
+    xmlns="http://www.w3.org/2000/svg"
+    id="planet"
+    class="scene-1"
+  >
+    <image href="planet.png" height="200" width="200"></image>
+  </svg>
+
+
     <script src="chalk.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
@@ -352,13 +354,20 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
       // );
     </script>
     <script>
-      $(document).ready(function () {
+      var transitioning = false;
+      $(document).ready(
+        
+        function () {
         // Loop through scene links from 1 to 9
         for (let i = 1; i <= 9; i++) {
           const sceneLink = $(`#scene-${i}`);
           sceneLink.click(function () {
-            resetHorizontalBlocks();
+            // $("body").get(0).style.setProperty("--linkHighlight", "--DelftBlue");
+            if(!transitioning)
+            {
+              resetHorizontalBlocks();
             $(".horizontal-block").css("visibility", "visible");
+            transitioning = true;
             pretransition();
             setTimeout(() => {
               transition();
@@ -366,7 +375,14 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
             setTimeout(() => {
               $(".horizontal-block").css("visibility", "hidden");
               resetHorizontalBlocks();
+              transitioning = false;
+              $("body").get(0).style.setProperty("--linkHighlight", "#669BBC");
             }, 6000);
+            }
+            else
+            {
+              alert("Try not to click navigation buttons while the scene is still in transition (It doesn't function correctly otherwise.)");
+            }
           });
         }
       });
