@@ -103,7 +103,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
               const particleMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff});
               const particles = new THREE.Group();
       
-                  setInterval(()=>{        // Initialize particles
+                  var thingy = setInterval(()=>{        // Initialize particles
               for (let i = 0; i < particleCount; i++) {
                   const particle = new THREE.Mesh(particleGeometry, particleMaterial);
                   particle.position.copy(object.position);
@@ -115,6 +115,11 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
                       -Math.random()
                   ).normalize().multiplyScalar(0.5);
                   particle.userData.velocity = velocity;
+                  setTimeout(() => {
+                            scene.remove(particle);
+                            particle.geometry.dispose();
+                            particle.material.dispose();
+                          }, 500);
       
                   particles.add(particle);
               }
@@ -146,9 +151,6 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
                           particle.position.add(particle.userData.velocity);
       
                           // Apply gravity after 2 seconds
-                          if (Date.now() - particle.userData.startTime > 2000) {
-                              scene.remove(particle);
-                          }
                       }
                   });
       
@@ -177,6 +179,11 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
           camera.updateProjectionMatrix();
           renderer.setSize(window.innerWidth, window.innerHeight);
       });
+      }
+      function cleanupScene6()
+      {
+        console.log("Clearing scene 6");
+        clearInterval(thingy);
       }
       document.getElementById('scene-6').addEventListener('click', ()=>{startScene6()});
       </script>
