@@ -36,7 +36,7 @@ function startScene7()
             cloudBrightness+=0.005;
         }
         cloud.style.filter = "brightness(" + cloudBrightness + ")";
-        console.log("brightening: " + cloudBrightness);
+        // console.log("brightening: " + cloudBrightness);
     }, 100);
     update();
     document.getElementsByTagName("body")[0].style.cursor = "pointer";
