@@ -9,6 +9,7 @@ var starsOn = true;
 var counting = 1;
 var counter = null;
 var planet = document.getElementById('planet');
+centerSVG();
 
 function centerSVG()
 {
@@ -22,7 +23,7 @@ function centerSVG()
   
   var dx = (windowWidth - svgWidth) / 2;
   var dy = (windowHeight - svgHeight) / 2;
-  
+  console.log(dx+","+dy);
   svg.setAttribute('transform', `translate(${dx}, ${dy})`);
 }
 
@@ -116,9 +117,5 @@ function cleanupScene()
   leaveStart();
 }
 
-window.onresize = function() {
-  centerSVG();
-  console.log("canvas resized");
-  W = window.innerWidth;
-  H = window.innerHeight;
-};
+// window.onresize = function() {
+// };

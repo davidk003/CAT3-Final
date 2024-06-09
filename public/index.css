@@ -4,8 +4,9 @@
     --Orange: #F3A712;
     --Olivine: #A8C686;
     --AirSuperiorityBlue: #669BBC;
+    --bg: var(--DelftBlue);
 
-    background-color: var(--DelftBlue);
+    background-color: var(--bg);
     --linkHighlight: var(--AirSuperiorityBlue);
 }
 
@@ -120,5 +121,6 @@ a:link, a:visited, a:hover, a:active{
 }
 
 svg{
+    position: absolute;
     z-index: 52;
 }

@@ -49,4 +49,7 @@
     border-radius: 5px;
     box-shadow: inset 0 0 10px #545445;
 }
-  
+#pattern
+{
+    display: none;
+}

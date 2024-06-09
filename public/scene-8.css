@@ -1,12 +1,19 @@
+#bg-8
+{
+  visibility: hidden;
+  height: 100%;
+  width: 100%;
+  background-color: antiquewhite;
+}
 .poem-scene-8{
     visibility: hidden;
 }
 
 #poem-scene-8-container {
+  display: none;
     position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    padding-top: 10%;
+    padding-bottom: 50%;
     text-align: center;
     z-index: 100;
 }
@@ -18,6 +25,7 @@
     white-space: pre;
     color: black;
     z-index: 100;
+    /* margin-right: 40px; */
 }
 
 .poem-scene-8-abs{
