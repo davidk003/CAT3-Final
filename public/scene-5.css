@@ -6,16 +6,16 @@
 
 .cradle
 {
-position:absolute; 
-width: 220px;
-height: 180px;
-background-color: var(--Orange);
-top:50%;
-left:  50%;
-border-radius: 5%;
-align-items: center;
-border-top: 15px solid #eee7d5;
-transform: translate(-50%, -50%);
+    position:absolute; 
+    width: 220px;
+    height: 180px;
+    background-color: var(--Orange);
+    top: 50%;
+    left: 50%;
+    border-radius: 5%;
+    align-items: center;
+    border-top: 15px solid #eee7d5;
+    transform: translate(-50%, -50%);
 }
 .cradle-top
 {
@@ -74,7 +74,7 @@ animation: lastball .9s alternate ease-out infinite;
 #cradle-background
 {
     position: absolute;
-    z-index: -100;
+    z-index: -1;
     height: 100%;
     width: 100%;
     background-color: var(--Olivine);
