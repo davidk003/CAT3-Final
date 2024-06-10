@@ -83,15 +83,23 @@ SCENES.forEach(function (element, i)
   link.setAttribute("class", "navbar");
   navbar.appendChild(link);
 });
+let github = document.createElement("a");
+github.textContent ="github";
+github.setAttribute('href', "https://github.com/davidk003/CAT3-Final")
+github.style.float = "right";
+github.setAttribute('class', "navbar")
+navbar.appendChild(github);
 let fullTranslation = document.createElement("a");
 fullTranslation.textContent ="Full Translation";
 fullTranslation.setAttribute('href', "final-translation.html")
 fullTranslation.setAttribute('class', "navbar")
+fullTranslation.style.float = "right";
 navbar.appendChild(fullTranslation);
 
 let translatorIntro = document.createElement("a");
 translatorIntro.textContent ="Translator's Introduction";
 translatorIntro.setAttribute('href', "translators-introduction.html")
+translatorIntro.style.float = "right";
 translatorIntro.setAttribute('class', "navbar")
 navbar.appendChild(translatorIntro);
 
