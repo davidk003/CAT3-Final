@@ -20,9 +20,9 @@ function startScene8()
 
         
     }, 500);
-    setTimeout(() => {alert("Click any word to control with WASD");
+    // setTimeout(() => {alert("Click any word to control with WASD");
         
-    }, 4000);
+    // }, 4000);
     container.style.display="block";
 }   
 
