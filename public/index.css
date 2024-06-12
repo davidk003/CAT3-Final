@@ -91,12 +91,16 @@ canvas{
 }
 
 .navbar{
+    display:  flex;
     position: relative;
     z-index: 1000;
     color: black;
     background-color: var(--DelftBlue);
     overflow: hidden;
 }
+.navbar > :nth-child(9) {
+    margin-right: auto;
+  }
 
 .navbar a{
     z-index: 1000;
@@ -105,7 +109,8 @@ canvas{
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-    font-size: 17px;
+    font-size: 18px;
+    font-family: monospace;
 }
 
 a:link, a:visited, a:hover, a:active{
@@ -123,4 +128,8 @@ a:link, a:visited, a:hover, a:active{
 svg{
     position: absolute;
     z-index: 52;
+}
+
+pre{
+    font-family: monospace;
 }

@@ -45,6 +45,7 @@ function startScene7()
 
 function cleanupScene7()
 {
+    console.log("Cleaned up scene 7");
     document.getElementsByTagName("body")[0].style.cursor = "default";
     clearInterval(brighten);
 }
