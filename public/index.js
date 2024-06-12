@@ -230,7 +230,7 @@ function onHKeyPress(event) {
 }
 
 window.addEventListener('load', ()=>{setTimeout(() => {  alert(
-  "NOTE THAT THIS WEBSITE IS NOT MEANT FOR MOBILE DEVICES\n\nHi, welcome to our project, this is supposed to be a visual representation of a poem, use the scene buttons on the top left to progress!\nPress the 'H' key to get help/hint on what visual element/effect is hidden on each scene!"
+  "NOTE THAT THIS WEBSITE IS NOT MEANT FOR MOBILE DEVICES\n\nHi, welcome to our CAT3 project, this is supposed to be a visual representation of a poem based on a translation of The Village Schoolteacher by Liu Cixin.\nUse the scene buttons on the top left to progress!\nPress the 'H' key to get help/hint on what visual element/effect is hidden on each scene!"
 );
   
 }, 200);})
